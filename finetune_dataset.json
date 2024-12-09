@@ -1,0 +1,14 @@
+[
+    {
+        "input": "Context:\nSource: https://medium.com/@thehummingbird/navigation-ros-1-vs-navigation-2-ros-2-12398b64cd\nContent: \n\nSource: https://medium.com/@thehummingbird/navigation-ros-1-vs-navigation-2-ros-2-12398b64cd\nContent: \n\nSource: https://www.youtube.com/watch?v=7TVWlADXwRw\nContent: \n\nSource: https://www.youtube.com/watch?v=7TVWlADXwRw\nContent: \n\nSource: https://www.youtube.com/watch?v=7TVWlADXwRw\nContent: \n\nQuestion: What is ROS2 navigation stack?",
+        "output": "The ROS2 navigation stack (Nav2) provides tools for autonomous robot navigation."
+    },
+    {
+        "input": "Context:\nSource: https://medium.com/@thehummingbird/navigation-ros-1-vs-navigation-2-ros-2-12398b64cd\nContent: \n\nSource: https://medium.com/@thehummingbird/navigation-ros-1-vs-navigation-2-ros-2-12398b64cd\nContent: \n\nSource: https://medium.com/@CanyonLakeRobotics/tuning-the-ros2-nav2-stack-5b01f455e217\nContent: \n\nSource: https://medium.com/@CanyonLakeRobotics/tuning-the-ros2-nav2-stack-5b01f455e217\nContent: \n\nSource: https://medium.com/@kathybuilds/building-rescue-robots-3-trying-out-gazebo-e821c47b09d1\nContent: \n\nQuestion: How does MoveIt2 help in motion planning?",
+        "output": "MoveIt2 is a motion planning framework for robot arms in ROS2."
+    },
+    {
+        "input": "Context:\nSource: https://medium.com/@thehummingbird/navigation-ros-1-vs-navigation-2-ros-2-12398b64cd\nContent: \n\nSource: https://medium.com/@thehummingbird/navigation-ros-1-vs-navigation-2-ros-2-12398b64cd\nContent: \n\nSource: https://www.youtube.com/watch?v=7TVWlADXwRw\nContent: \n\nSource: https://www.youtube.com/watch?v=7TVWlADXwRw\nContent: \n\nSource: https://www.youtube.com/watch?v=7TVWlADXwRw\nContent: \n\nQuestion: Explain how Gazebo works with ROS2.",
+        "output": "Gazebo integrates with ROS2 to provide realistic robot simulation environments."
+    }
+]

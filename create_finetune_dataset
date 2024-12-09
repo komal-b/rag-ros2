@@ -1,0 +1,79 @@
+import json
+from pymongo import MongoClient
+import qdrant_client
+from transformers import BertTokenizer, BertModel
+import torch
+
+
+mongo_client = MongoClient('mongodb://llm_engineering:llm_engineering@127.0.0.1:27017')
+db = mongo_client['rag_system']
+collection = db['raw_data']
+
+
+qdrant = qdrant_client.QdrantClient("http://127.0.0.1:6333")
+collection_name = "raw_data"
+
+
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = BertModel.from_pretrained('bert-base-uncased')
+
+def extract_features(text):
+    """Convert text to embeddings using BERT."""
+    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+    with torch.no_grad():
+        outputs = model(**inputs)
+    embeddings = outputs.last_hidden_state.mean(dim=1).squeeze().numpy()
+    return embeddings
+
+def retrieve_top_k_documents(query, top_k=5):
+    """Retrieve top-k documents from Qdrant."""
+    query_embedding = extract_features(query)
+    search_result = qdrant.search(
+        collection_name=collection_name,
+        query_vector=query_embedding.tolist(),
+        limit=top_k
+    )
+    
+    top_docs = []
+    for result in search_result:
+        content = result.payload.get("metadata", {}).get("content", "")
+        url = result.payload.get("metadata", {}).get("url", "")
+        top_docs.append(f"Source: {url}\nContent: {content}")
+    return "\n\n".join(top_docs)
+
+
+sample_questions = [
+    "What is ROS2 navigation stack?",
+    "How does MoveIt2 help in motion planning?",
+    "Explain how Gazebo works with ROS2."
+]
+
+manual_answers = [
+    "The ROS2 navigation stack (Nav2) provides tools for autonomous robot navigation.",
+    "MoveIt2 is a motion planning framework for robot arms in ROS2.",
+    "Gazebo integrates with ROS2 to provide realistic robot simulation environments."
+]
+
+def create_finetune_dataset(sample_questions, manual_answers, top_k=5):
+    """Create a fine-tuning dataset."""
+    dataset = []
+    for question, answer in zip(sample_questions, manual_answers):
+        try:
+            
+            context = retrieve_top_k_documents(question, top_k)
+            
+            entry = {
+                "input": f"Context:\n{context}\n\nQuestion: {question}",
+                "output": answer
+            }
+            dataset.append(entry)
+            print(f"Processed question: {question}")
+        except Exception as e:
+            print(f"Failed to process question '{question}': {e}")
+    
+    with open("finetune_dataset.json", "w") as f:
+        json.dump(dataset, f, indent=4)
+    print("Fine-tuning dataset created: finetune_dataset.json")
+
+if __name__ == "__main__":
+    create_finetune_dataset(sample_questions, manual_answers)
