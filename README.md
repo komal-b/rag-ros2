@@ -7,7 +7,9 @@ MoveIt2, Gazebo, and SLAM — get answers grounded in real documentation.
 ## 🏗️ Architecture
 
 ETL Pipeline → MongoDB → Feature Engineering → Qdrant
+
 ↓
+
 User Query → Embedding → Vector Search → Groq LLM → Answer
 
 ## 📊 RAGAS Evaluation Results
@@ -76,8 +78,6 @@ poetry run python gradio_interface.py
 ├── gradio_interface.py      # Chat UI + RAG pipeline
 
 ├── evaluate.py              # RAGAS evaluation framework
-
-├── finetuning.py            # GPT-2 fine-tuning on ROS2 Q&A
 
 ├── docker-compose.yml       # MongoDB + Qdrant services
 
