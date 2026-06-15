@@ -47,8 +47,11 @@ golden_dataset = [
     {"question": "What is a costmap in Nav2?", "ground_truth": "A costmap represents the environment as a grid where each cell has a cost value indicating obstacles"},
     {"question": "What is MoveIt2?", "ground_truth": "MoveIt2 is a motion planning framework for robot manipulation in ROS2"},
     {"question": "What is Gazebo?", "ground_truth": "Gazebo is a robot simulation environment that works with ROS2"},
-    {"question": "What is SLAM in ROS2?", "ground_truth": "SLAM stands for Simultaneous Localization and Mapping allowing robots to build maps while navigating"}
-    ]
+    {"question": "What is SLAM in ROS2?", "ground_truth": "SLAM stands for Simultaneous Localization and Mapping allowing robots to build maps while navigating"},
+    {"question": "What are the three required TF transforms for Nav2 to function?", "ground_truth": "Nav2 requires three TF transforms: map to odom, odom to base_link, and base_link to base_scan"},
+    {"question": "What is the difference between MoveIt2 and Nav2 in ROS2?", "ground_truth": "Nav2 handles mobile robot navigation and path planning while MoveIt2 handles robot arm manipulation and motion planning"},
+    {"question": "How do you save a map generated with SLAM in ROS2 Gazebo simulation?", "ground_truth": "You save a SLAM generated map using the command ros2 run nav2_map_server map_saver_cli -f maps/my_map"}
+]
 
 def get_embedding(text):
     return embedding_model.encode(text, convert_to_numpy=True).tolist()
