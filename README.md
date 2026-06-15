@@ -14,12 +14,13 @@ User Query → Embedding → Vector Search → Groq LLM → Answer
 
 | Metric | Score |
 |--------|-------|
-| Faithfulness | 0.89 |
-| Answer Relevancy | 0.91 |
-| Context Precision | 0.92 |
-| Context Recall | 1.00 |
+| Faithfulness | 0.79 |
+| Answer Relevancy | 0.85 |
+| Context Precision | 0.70 |
+| Context Recall | 0.94 |
 
-![ragas_screenshot](image.png)
+<img width="1084" height="245" alt="image" src="https://github.com/user-attachments/assets/3b6ee4bb-bdff-4501-8760-892ab8347d85" />
+
 
 ## 🛠️ Tech Stack
 
